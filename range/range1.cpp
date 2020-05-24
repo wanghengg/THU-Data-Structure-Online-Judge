@@ -1,3 +1,6 @@
+/*
+ * 目前此方法只有前11个测试用例通过
+ */
 #include <stdio.h>
 #include <stdlib.h>
 # define L 50000
