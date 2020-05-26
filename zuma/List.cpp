@@ -56,10 +56,18 @@ ListNode* List::insertAt(int n, const char &e) {
 
 // 打印list所有元素
 void List::print() {
+    // 原来的方法使用printf次数过多导致第20个测试运行超时
+//    ListNode* head = header;
+//    while ((head = head->succ) != trailer)
+//        printf("%c", head->data);
+//    printf("\n");
+    char str[size() + 1];
+    int i = 0;
     ListNode* head = header;
     while ((head = head->succ) != trailer)
-        printf("%c", head->data);
-    printf("\n");
+        str[i++] = head->data;
+    str[i] = '\0';  // 后面作为字符串输出最后一个元素应该是'\0'空字符，否则输出结果错误
+    printf("%s\n", str);
 }
 
 /*
