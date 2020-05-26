@@ -3,17 +3,18 @@
 
 struct Point{
     int x, y;
-    void print() const {
-        printf("%d %d\n", x, y);
-    }
+//    void print() const {
+//        printf("%d %d\n", x, y);
+//    }
 };
 
 Point lightHouseCoordinate[MAXSIZE];  // points记录n个灯塔的坐标
-Point* newPoint = new Point[MAXSIZE];
-int* b = new int[MAXSIZE];
-unsigned long count;   // 记录顺序对，使用int类型可能溢出
+Point newPoint[MAXSIZE];
+int b[MAXSIZE];
+unsigned long count = 0;   // 记录顺序对，使用int类型可能溢出
 int coordinateY[MAXSIZE];   // 记录按照x坐标排序后的y坐标
 
+// 归并排序参考了课堂内容
 void mergeX(Point* points, int lo, int mid, int hi) {
     int i = lo, j = mid, k = 0;
 //    Point* newPoint = new Point[hi - lo];
@@ -40,12 +41,12 @@ void mergeY(int a[], int lo, int mid, int hi) {
     int i = lo, j = mid;
     int k = 0;
 //    for (; i < mid && j < hi; ) {
-//        if (a[i] < a[j])
+//        if (a[i] < a[j]) {
 //            i++;
-//        else {
-//            j++;
-//            count += (mid - i);
+//            count += (hi - j);
 //        }
+//        else
+//            j++;
 //    }
 //    int* b = new int[hi-lo];
     for (; i < mid && j < hi; ) {
@@ -75,14 +76,12 @@ int main() {
     for (int i = 0; i < n; ++i)
         scanf("%d %d", &lightHouseCoordinate[i].x, &lightHouseCoordinate[i].y);
     mergeSortX(lightHouseCoordinate, 0, n);
-    for (int i = 0; i < n; ++i)
-        lightHouseCoordinate[i].print();
+//    for (int i = 0; i < n; ++i)
+//        lightHouseCoordinate[i].print();
     for (int i = 0; i < n; ++i)
         coordinateY[i] = lightHouseCoordinate[i].y;
     mergeSortY(coordinateY, 0, n);
-    for (int i = 0; i < n; ++i)
-        printf("%d ", coordinateY[i]);
 
-    printf("\n%llu", count);
+    printf("%lu\n", count);
     return 0;
 }
